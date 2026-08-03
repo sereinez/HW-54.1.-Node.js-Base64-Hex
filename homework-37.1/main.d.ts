@@ -9,6 +9,12 @@ declare class Calculator {
     multiply(a: number, b: number): number;
 }
 declare namespace UserProfile {
+    interface ProfileInterface {
+        id: string;
+        name: string;
+        email: string;
+    }
+    function createProfile(name: string, email: string): ProfileInterface;
 }
 export { createPerson, Calculator, UserProfile };
 //# sourceMappingURL=main.d.ts.map

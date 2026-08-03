@@ -1,7 +1,9 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserProfile = exports.Calculator = void 0;
-exports.createPerson = createPerson;
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
 console.log('#20. TypeScript homework example file');
 function createPerson(name, age, isActive) {
     return { name, age, isActive };
@@ -32,21 +34,50 @@ function LogMethodCalls(target, propertyKey, descriptor) {
     return descriptor;
 }
 class Calculator {
-    @LogMethodCalls
     add(a, b) {
         return a + b;
     }
-    @LogMethodCalls
     multiply(a, b) {
         return a * b;
     }
 }
-exports.Calculator = Calculator;
+__decorate([
+    LogMethodCalls
+], Calculator.prototype, "add", null);
+__decorate([
+    LogMethodCalls
+], Calculator.prototype, "multiply", null);
 const calculator = new Calculator();
 //"Calling "add" with arguments: 2, 3"
 console.log(calculator.add(2, 3)); // 5
 // // "Calling "multiply" with arguments: 3, 4"
 console.log(calculator.multiply(3, 4)); // 12
+/*
+ * #3
+ *
+ * Задача: Реалізувати функціонал для створення профілю користувача в просторі імен UserProfile.
+ *
+ * Мета: Надати можливість створювати об'єкт профілю з унікальним ідентифікатором, ім'ям та електронною поштою.
+ *
+ * Вимоги до реалізації:
+ * 1. Створити namespace `UserProfile`, що слугуватиме контейнером для визначення інтерфейсу профілю та функцій.
+ * 2. Визначити всередині `UserProfile` інтерфейс `ProfileInterface`, який має містити властивості `id` (string), `name` (string) та `email` (string).
+ * 3. Реалізувати функцію `createProfile` всередині `UserProfile`, яка приймає `name` та `email`, створює та повертає об'єкт `ProfileInterface` з унікальним `id`, вказаним ім'ям та електронною поштою.
+ * 4. Функція `generateId` має бути приватною всередині `UserProfile` і слугувати для генерації унікального ідентифікатора для кожного профілю.
+ *
+ */
+var UserProfile;
+(function (UserProfile) {
+    function generateId() {
+        return Math.random().toString();
+    }
+    function createProfile(name, email) {
+        const id = generateId();
+        return { id, name, email };
+    }
+    UserProfile.createProfile = createProfile;
+})(UserProfile || (UserProfile = {}));
 const profile = UserProfile.createProfile('John Doe', 'john@example.com');
 console.log(profile); // { "id": "e6uvai5egqd", "name": "John Doe", "email": "john@example.com" }
+export { createPerson, Calculator, UserProfile };
 //# sourceMappingURL=main.js.map
